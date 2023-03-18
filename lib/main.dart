@@ -1,5 +1,6 @@
 import 'package:despesas_pessoais/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(const ExpensesApp());
 
@@ -57,14 +58,15 @@ class MyHomePage extends StatelessWidget {
                             Flexible(
                               flex: 1,
                               child: Container(
-                                padding: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 5),
                                 decoration: BoxDecoration(
                                   color: Colors.purple,
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(25),
                                 ),
                                 margin: const EdgeInsets.symmetric(
                                   horizontal: 10,
-                                  vertical: 10,
+                                  vertical: 5,
                                 ),
                                 child: Center(
                                   child: Text(
@@ -105,7 +107,7 @@ class MyHomePage extends StatelessWidget {
                                         vertical: 3,
                                       ),
                                       child: Text(
-                                        tr.date.toString(),
+                                        DateFormat('d MMM y').format(tr.date),
                                         style: const TextStyle(
                                             fontSize: 14,
                                             color: Color.fromARGB(
