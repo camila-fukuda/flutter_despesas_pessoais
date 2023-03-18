@@ -54,9 +54,28 @@ class MyHomePage extends StatelessWidget {
                   .map((tr) => Card(
                         child: Row(
                           children: [
-                            ColoredBox(
-                              color: Colors.purple,
-                              child: Text(tr.value.toString()),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.purple,
+                                border: Border.all(
+                                  color: Colors.purple,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              child: Text(
+                                tr.value.toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
