@@ -51,7 +51,24 @@ class MyHomePage extends StatelessWidget {
           ),
           Column(
               children: _transactions
-                  .map((tr) => Card(child: Text(tr.title)))
+                  .map((tr) => Card(
+                        child: Row(
+                          children: [
+                            ColoredBox(
+                              color: Colors.purple,
+                              child: Text(tr.value.toString()),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(tr.title),
+                                Text(tr.date.toString()),
+                              ],
+                            )
+                          ],
+                        ),
+                      ))
                   .toList()),
         ],
       ),
