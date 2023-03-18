@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
     Transaction(
       id: 't2',
       title: 'Conta internet',
-      value: 112.50,
+      value: 12000.129,
       date: DateTime.now(),
     )
   ];
@@ -54,37 +54,68 @@ class MyHomePage extends StatelessWidget {
                   .map((tr) => Card(
                         child: Row(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.purple,
-                                border: Border.all(
+                            Flexible(
+                              flex: 1,
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
                                   color: Colors.purple,
-                                  width: 2,
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 10,
-                              ),
-                              child: Text(
-                                tr.value.toString(),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.white,
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 10,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'R\$ ${tr.value.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(tr.title),
-                                Text(tr.date.toString()),
-                              ],
-                            )
+                            Flexible(
+                              flex: 2,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.fromLTRB(5, 10, 10, 10),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 3,
+                                      ),
+                                      child: Text(
+                                        tr.title,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 3,
+                                      ),
+                                      child: Text(
+                                        tr.date.toString(),
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Color.fromARGB(
+                                                255, 121, 121, 121)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ))
