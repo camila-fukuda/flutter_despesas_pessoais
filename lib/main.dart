@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 main() => runApp(const ExpensesApp());
@@ -22,8 +24,20 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Despesas Pessoais'),
       ),
-      body: const Center(
-        child: Text('Versão inicial.'),
+      body: Column(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child: const Card(
+              color: Colors.blue,
+              elevation: 5,
+              child: Text('Gráfico dias da semana.'),
+            ),
+          ),
+          const Card(
+            child: Text('Lista de transações.'),
+          )
+        ],
       ),
     );
   }
