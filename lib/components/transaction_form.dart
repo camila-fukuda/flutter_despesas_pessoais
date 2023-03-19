@@ -56,12 +56,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.purple,
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: _submitForm,
-                      child: const Text('Adicionar')),
+                      onPressed: _submitForm, child: const Text('Adicionar')),
                 ],
               ),
             ),
