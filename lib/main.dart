@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:math';
+import 'package:despesas_pessoais/components/chart.dart';
 import 'package:despesas_pessoais/components/transaction_form.dart';
 import 'package:despesas_pessoais/components/transaction_list.dart';
 import 'package:despesas_pessoais/models/transaction.dart';
@@ -51,22 +52,40 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _transactions = <Transaction>[
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo caderno',
-    //   value: 31.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta internet',
-    //   value: 12000.129,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta antiga',
+      value: 411.99,
+      date: DateTime.now().subtract(const Duration(days: 23)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo caderno',
+      value: 31.99,
+      date: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta internet',
+      value: 120.129,
+      date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Conta energia',
+      value: 500.79,
+      date: DateTime.now().subtract(const Duration(days: 2)),
+    ),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where((tr) =>
+            tr.date.isAfter(DateTime.now().subtract(const Duration(days: 7))))
+        .toList();
+  }
+
   _addTransaction(String title, double value) {
-    print('entrou add');
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
@@ -105,13 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(
-              child: Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text('Gráfico Dias Semana'),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
