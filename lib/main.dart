@@ -20,9 +20,9 @@ class ExpensesApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
-          primary: Colors.purple,
-          secondary: Colors.amber,
-        ),
+            primary: Colors.purple,
+            secondary: Colors.amber,
+            tertiary: Colors.green),
         textTheme: tema.textTheme.copyWith(
           titleLarge: const TextStyle(
             fontFamily: 'OpenSans',
