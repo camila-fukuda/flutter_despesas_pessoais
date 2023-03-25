@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, String) onSubmit;
 
   const TransactionForm(this.onSubmit, {super.key});
 
@@ -13,27 +13,27 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  final _dateController = TextEditingController();
+  final _dateController =
+      TextEditingController(text: DateFormat('dd/MM/y').format(DateTime.now()));
 
   _submitForm() {
     final title = _titleController.text;
     final value = double.tryParse(_valueController.text.replaceAll(",", "."));
+    final date = _dateController.text;
 
     if (title.isEmpty || value == null) {
-      print('empty');
       return;
     }
-
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, date);
   }
 
   _showDatePicker() {
     showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2019),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
       if (pickedDate == null) {
         return;
       }
@@ -54,7 +54,6 @@ class _TransactionFormState extends State<TransactionForm> {
           children: [
             TextField(
               controller: _titleController,
-              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Título',
                 icon: Icon(Icons.receipt),
@@ -67,7 +66,6 @@ class _TransactionFormState extends State<TransactionForm> {
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               controller: _valueController,
-              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Valor',
                 icon: Icon(Icons.attach_money),

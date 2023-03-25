@@ -15,10 +15,11 @@ class TransactionList extends StatelessWidget {
           ? Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     'Nenhuma transação cadastrada.',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: TextStyle(color: Colors.grey[700], fontSize: 20),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10),
@@ -26,6 +27,8 @@ class TransactionList extends StatelessWidget {
                       height: 200,
                       child: Image.asset(
                         'assets/images/waiting.png',
+                        color: Colors.white.withOpacity(0.4),
+                        colorBlendMode: BlendMode.modulate,
                         fit: BoxFit.cover,
                       ),
                     ),

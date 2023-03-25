@@ -6,6 +6,7 @@ import 'package:despesas_pessoais/components/transaction_form.dart';
 import 'package:despesas_pessoais/components/transaction_list.dart';
 import 'package:despesas_pessoais/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -51,32 +52,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = <Transaction>[
-    Transaction(
-      id: 't0',
-      title: 'Conta antiga',
-      value: 411.99,
-      date: DateTime.now().subtract(const Duration(days: 23)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'Novo caderno',
-      value: 31.99,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta internet',
-      value: 120.129,
-      date: DateTime.now().subtract(const Duration(days: 4)),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Conta energia',
-      value: 500.79,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-  ];
+  final _transactions = <Transaction>[];
 
   List<Transaction> get _recentTransactions {
     return _transactions
@@ -85,12 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
         .toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, String dateTime) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: DateFormat('dd/MM/y').parse(dateTime),
     );
 
     setState(() {
