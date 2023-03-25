@@ -13,7 +13,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
-  DateTime? _selectedDate;
+  final _dateController = TextEditingController();
 
   _submitForm() {
     final title = _titleController.text;
@@ -39,7 +39,7 @@ class _TransactionFormState extends State<TransactionForm> {
       }
 
       setState(() {
-        _selectedDate = pickedDate;
+        _dateController.text = DateFormat('dd/MM/y').format(pickedDate);
       });
     });
   }
@@ -57,7 +57,11 @@ class _TransactionFormState extends State<TransactionForm> {
               onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Título',
+                icon: Icon(Icons.receipt),
               ),
+            ),
+            const SizedBox(
+              height: 30,
             ),
             TextField(
               keyboardType:
@@ -66,35 +70,25 @@ class _TransactionFormState extends State<TransactionForm> {
               onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Valor',
+                icon: Icon(Icons.attach_money),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'Nenhuma data selecionada!'
-                          : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}',
-                    ),
+            const SizedBox(
+              height: 30,
+            ),
+            TextField(
+              controller:
+                  _dateController, //editing controller of this TextField
+              decoration: const InputDecoration(
+                  icon: Icon(Icons.calendar_today), //icon of text field
+                  labelText: "Selecione uma data" //label text of field
                   ),
-                  TextButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 214, 214, 214)),
-                        foregroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 63, 63, 63))),
-                    onPressed: _showDatePicker,
-                    child: const Text(
-                      'Selecionar uma data.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              readOnly:
+                  true, //set it true, so that user will not able to edit text
+              onTap: _showDatePicker,
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -115,84 +109,3 @@ class _TransactionFormState extends State<TransactionForm> {
     );
   }
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
-
-// void main() {
-//   runApp(MyApp()); 
-// }
-
-// class MyApp extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         title: "Test App",
-//         home: HomePage(),
-//     );
-//   }
-// }
-
-// class HomePage extends StatefulWidget{
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _HomePage();
-//   }
-// }
-
-// class _HomePage extends State<HomePage>{
-//   TextEditingController dateinput = TextEditingController(); 
-//   //text editing controller for text field
-  
-//   @override
-//   void initState() {
-//     dateinput.text = ""; //set the initial value of text field
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//             title:Text("DatePicker on TextField"), 
-//             backgroundColor: Colors.redAccent, //background color of app bar
-//         ),
-//         body:Container(
-//           padding: EdgeInsets.all(15),
-//           height:150,
-//           child:Center( 
-//              child:TextField(
-//                 controller: dateinput, //editing controller of this TextField
-//                 decoration: InputDecoration( 
-//                    icon: Icon(Icons.calendar_today), //icon of text field
-//                    labelText: "Enter Date" //label text of field
-//                 ),
-//                 readOnly: true,  //set it true, so that user will not able to edit text
-//                 onTap: () async {
-//                   DateTime pickedDate = await showDatePicker(
-//                       context: context, initialDate: DateTime.now(),
-//                       firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-//                       lastDate: DateTime(2101)
-//                   );
-                  
-//                   if(pickedDate != null ){
-//                       print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-//                       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate); 
-//                       print(formattedDate); //formatted date output using intl package =>  2021-03-16
-//                         //you can implement different kind of Date Format here according to your requirement
-
-//                       setState(() {
-//                          dateinput.text = formattedDate; //set output date to TextField value. 
-//                       });
-//                   }else{
-//                       print("Date is not selected");
-//                   }
-//                 },
-//              )
-//           )
-//         )
-//     );
-//   }
-// }
