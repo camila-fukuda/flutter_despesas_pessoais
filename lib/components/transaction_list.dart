@@ -11,19 +11,23 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Nenhuma transação cadastrada.',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 20),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 30),
-                  child: SizedBox(
-                    height: 200,
+        ? LayoutBuilder(
+            builder: (context, constraints) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                    child: Text(
+                      'Nenhuma transação cadastrada.',
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18 * MediaQuery.of(context).textScaleFactor,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: constraints.maxHeight * 0.4,
                     child: Image.asset(
                       'assets/images/waiting.png',
                       color: Colors.white.withOpacity(0.4),
@@ -31,9 +35,9 @@ class TransactionList extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            },
           )
         : ListView.builder(
             itemCount: transactions.length,
