@@ -46,6 +46,8 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return SingleChildScrollView(
       child: Card(
         elevation: 5,
@@ -54,7 +56,7 @@ class _TransactionFormState extends State<TransactionForm> {
             top: 40,
             right: 10,
             left: 10,
-            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+            bottom: 10 + mediaQuery.viewInsets.bottom,
           ),
           child: Column(
             children: [

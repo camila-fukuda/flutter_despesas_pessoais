@@ -10,6 +10,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return transactions.isEmpty
         ? LayoutBuilder(
             builder: (context, constraints) {
@@ -22,7 +24,7 @@ class TransactionList extends StatelessWidget {
                       'Nenhuma transação cadastrada.',
                       style: TextStyle(
                         color: Colors.grey[700],
-                        fontSize: 18 * MediaQuery.of(context).textScaleFactor,
+                        fontSize: 18 * mediaQuery.textScaleFactor,
                       ),
                     ),
                   ),
@@ -61,7 +63,7 @@ class TransactionList extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   subtitle: Text(DateFormat('d MMM y').format(tr.date)),
-                  trailing: MediaQuery.of(context).size.width > 480
+                  trailing: mediaQuery.size.width > 480
                       ? TextButton.icon(
                           onPressed: () => onRemove(tr.id),
                           icon: Icon(Icons.delete,

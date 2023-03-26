@@ -72,6 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _transactions.add(newTransaction);
+      _transactions.sort((a, b) {
+        int aDate = DateTime.parse(a.date.toString()).microsecondsSinceEpoch;
+        int bDate = DateTime.parse(b.date.toString()).microsecondsSinceEpoch;
+        return bDate.compareTo(aDate);
+      });
     });
 
     Navigator.of(context).pop();
@@ -95,8 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+
+    bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: const Text('Despesas Pessoais'),
@@ -116,9 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    final availableHeight = MediaQuery.of(context).size.height -
+    final availableHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appBar,
